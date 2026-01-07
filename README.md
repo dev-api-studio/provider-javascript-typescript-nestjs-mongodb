@@ -1,4 +1,4 @@
-# NestJS Document Database Provider
+# NestJS Mongoose Document Database Provider
 
 Production-ready and testing-friendly document database provider for NestJS applications, implementing the `IDocumentDatabase` interface.
 
