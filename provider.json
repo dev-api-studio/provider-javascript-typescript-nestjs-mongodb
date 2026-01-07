@@ -1,0 +1,207 @@
+{
+  "author": "Dev API Studio",
+  "category": "DocumentDatabase",
+  "name": "Document Database Provider Javascript / Typescript for NestJS",
+  "description": "Implementation of the IDocumentDatabase interface for NestJS applications with Mongoose and in-memory providers",
+  "language": "javascript-typescript",
+  "framework": "nestjs",
+  "connector": "DocumentDatabase",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dev-api-studio/provider-javascript-typescript-nestjs-document-database"
+  },
+  "version": "1.0.0",
+  "tag": "1.0.0",
+  "license": "MIT",
+  "keywords": [
+    "document-database",
+    "mongodb",
+    "mongoose",
+    "nosql",
+    "nestjs",
+    "typescript",
+    "provider",
+    "crud",
+    "aggregation",
+    "testing",
+    "in-memory"
+  ],
+  "features": [
+    "Mongoose integration for MongoDB 4.4 to 7.0",
+    "Support for Mongoose 6.x and 7.x",
+    "Complete CRUD operations (17 methods)",
+    "MongoDB aggregation pipeline support",
+    "Bulk write operations",
+    "Atomic operations (findOneAndUpdate, findOneAndReplace, findOneAndDelete)",
+    "In-memory fake database for testing",
+    "Full query operator support ($eq, $ne, $gt, $lt, $in, $regex, etc.)",
+    "Update operators ($set, $unset, $inc, $push, $pull)",
+    "Projection support",
+    "Sorting and pagination",
+    "NestJS dependency injection",
+    "Type-safe operations",
+    "Connection pooling",
+    "Lean queries for performance"
+  ],
+  "providers": [
+    {
+      "name": "MongooseDocumentDatabase",
+      "type": "production",
+      "description": "Production-ready MongoDB implementation using Mongoose ODM",
+      "compatibility": {
+        "mongodb": ["4.4", "5.0", "6.0", "7.0"],
+        "mongoose": ["6.x", "7.x"],
+        "@nestjs/mongoose": ["9.x", "10.x"]
+      }
+    },
+    {
+      "name": "FakeMemoryDocumentDatabase",
+      "type": "testing",
+      "description": "In-memory document database simulation for unit testing",
+      "features": [
+        "No external dependencies",
+        "Fast in-memory operations",
+        "Full query operator support",
+        "Aggregation pipeline simulation",
+        "Perfect for unit tests"
+      ]
+    }
+  ],
+  "operations": [
+    {
+      "name": "findById",
+      "category": "read",
+      "description": "Find a single document by ID"
+    },
+    {
+      "name": "findOne",
+      "category": "read",
+      "description": "Find a single document matching query"
+    },
+    {
+      "name": "find",
+      "category": "read",
+      "description": "Find multiple documents with filtering, sorting, and pagination"
+    },
+    {
+      "name": "countDocuments",
+      "category": "read",
+      "description": "Count documents matching query"
+    },
+    {
+      "name": "aggregate",
+      "category": "read",
+      "description": "Execute MongoDB aggregation pipeline"
+    },
+    {
+      "name": "insertOne",
+      "category": "write",
+      "description": "Insert a single document"
+    },
+    {
+      "name": "insertMany",
+      "category": "write",
+      "description": "Insert multiple documents"
+    },
+    {
+      "name": "updateOne",
+      "category": "write",
+      "description": "Update a single document"
+    },
+    {
+      "name": "updateMany",
+      "category": "write",
+      "description": "Update multiple documents"
+    },
+    {
+      "name": "replaceOne",
+      "category": "write",
+      "description": "Replace an entire document"
+    },
+    {
+      "name": "deleteOne",
+      "category": "write",
+      "description": "Delete a single document"
+    },
+    {
+      "name": "deleteMany",
+      "category": "write",
+      "description": "Delete multiple documents"
+    },
+    {
+      "name": "findOneAndUpdate",
+      "category": "atomic",
+      "description": "Find and update a document atomically"
+    },
+    {
+      "name": "findOneAndReplace",
+      "category": "atomic",
+      "description": "Find and replace a document atomically"
+    },
+    {
+      "name": "findOneAndDelete",
+      "category": "atomic",
+      "description": "Find and delete a document atomically"
+    },
+    {
+      "name": "bulkWrite",
+      "category": "bulk",
+      "description": "Execute multiple write operations in a single batch"
+    }
+  ],
+  "dependencies": {
+    "@nestjs/common": "^9.0.0 || ^10.0.0",
+    "@nestjs/core": "^9.0.0 || ^10.0.0",
+    "@nestjs/mongoose": "^9.0.0 || ^10.0.0",
+    "mongoose": "^6.0.0 || ^7.0.0"
+  },
+  "devDependencies": {
+    "@nestjs/testing": "^9.0.0 || ^10.0.0",
+    "jest": "^29.0.0",
+    "@types/jest": "^29.0.0"
+  },
+  "peerDependencies": {
+    "mongodb": "^4.4.0 || ^5.0.0 || ^6.0.0 || ^7.0.0"
+  },
+  "installation": {
+    "npm": "npm install @dev-api-studio/provider-javascript-typescript-nestjs-document-database @nestjs/mongoose mongoose",
+    "yarn": "yarn add @dev-api-studio/provider-javascript-typescript-nestjs-document-database @nestjs/mongoose mongoose",
+    "pnpm": "pnpm add @dev-api-studio/provider-javascript-typescript-nestjs-document-database @nestjs/mongoose mongoose"
+  },
+  "usage": {
+    "import": "import { DocumentDatabaseModule, MongooseDocumentDatabase, FakeMemoryDocumentDatabase, DOCUMENT_DATABASE_TOKEN } from '@dev-api-studio/provider-javascript-typescript-nestjs-document-database';",
+    "module_production": "DocumentDatabaseModule.forRoot({ mongoUri: 'mongodb://localhost:27017/mydb' })",
+    "module_testing": "DocumentDatabaseModule.forRoot({ useFake: true })",
+    "injection": "@Inject(DOCUMENT_DATABASE_TOKEN) private readonly db: IDocumentDatabase"
+  },
+  "examples": {
+    "production": {
+      "description": "Production setup with MongoDB",
+      "code": "DocumentDatabaseModule.forRoot({ mongoUri: process.env.MONGODB_URI, mongoOptions: { retryWrites: true, w: 'majority' } })"
+    },
+    "testing": {
+      "description": "Testing setup with fake in-memory database",
+      "code": "DocumentDatabaseModule.forRoot({ useFake: true })"
+    },
+    "async": {
+      "description": "Async configuration with ConfigService",
+      "code": "DocumentDatabaseModule.forRootAsync({ useFactory: (config: ConfigService) => ({ mongoUri: config.get('MONGODB_URI') }), inject: [ConfigService] })"
+    }
+  },
+  "documentation": {
+    "readme": "README.md",
+    "examples": "examples/",
+    "api": "https://github.com/dev-api-studio/provider-javascript-typescript-nestjs-document-database#api"
+  },
+  "support": {
+    "issues": "https://github.com/dev-api-studio/provider-javascript-typescript-nestjs-document-database/issues",
+    "discussions": "https://github.com/dev-api-studio/provider-javascript-typescript-nestjs-document-database/discussions"
+  },
+  "metadata": {
+    "createdAt": "2024-01-07T14:30:00Z",
+    "updatedAt": "2024-01-07T14:30:00Z",
+    "status": "stable",
+    "tested": true,
+    "coverage": "100%"
+  }
+}
